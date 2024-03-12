@@ -2,6 +2,8 @@
 /shelf/
 /workspace.xml
 
+**/allure-results/
+
 .gradle
 **/build/
 !src/**/build/

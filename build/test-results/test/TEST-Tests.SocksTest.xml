@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Tests.SocksTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-03-12T10:02:43" hostname="MSI" time="5.841">
-  <properties/>
-  <testcase name="authorizationAndAddElemInCart()" classname="Tests.SocksTest" time="5.841"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
