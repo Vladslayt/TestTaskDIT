@@ -17,11 +17,11 @@ class SocksTest extends BaseTest {
                 .registrationUser()
                 .clickOnCatalogueButton();
 
-        new CataloguePage(page)
+        new CataloguePage(page, config)
                 .addSocksIntoBasket()
                 .goToBasketPage();
 
-        BasketPage basketPage = new BasketPage(page);
+        BasketPage basketPage = new BasketPage(page, config);
 
         basketPage.compareTotalSums(basketPage.takeTotalSum(), basketPage.takeSumAllProduct());
     }

@@ -3,6 +3,7 @@ package Pages;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import com.typesafe.config.Config;
 import io.qameta.allure.Step;
 
 /**
@@ -10,12 +11,14 @@ import io.qameta.allure.Step;
  */
 public class CataloguePage {
     private final Page page;
-    private static final String URL_CATALOGUE = "http://localhost/category.html";
+    private final Config config;
+    private final String URL_CATALOGUE;
     public final Locator basketButton;
 
-    public CataloguePage(Page page) {
+    public CataloguePage(Page page, Config config) {
         this.page = page;
-
+        this.config = config;
+        this.URL_CATALOGUE = config.getString("mainPage") + "category.html/";
         basketButton = page.locator("//div[@id='navbar']//a[@href=\"basket.html\"]");
     }
 

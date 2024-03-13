@@ -2,6 +2,7 @@ package Pages;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.typesafe.config.Config;
 import io.qameta.allure.Step;
 
 import java.util.List;
@@ -13,12 +14,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 public class BasketPage {
     private final Page page;
-    private static final String URL_BASKET = "http://localhost/basket.html";
+    private final Config config;
+    private final String URL_BASKET;
     private final Locator totalSumCart;
     private final Locator tableElementsCart;
 
-    public BasketPage(Page page) {
+    public BasketPage(Page page, Config config) {
         this.page = page;
+        this.config = config;
+        this.URL_BASKET = config.getString("mainPage") + "category.html/";
 
         totalSumCart = page.locator("#cartTotal");
         tableElementsCart = page.locator("form").
@@ -51,7 +55,7 @@ public class BasketPage {
      *
      * @return сумма всех товаров корзины
      */
-    @Step("calculating sum all product basket")
+    @Step("calculating the sum of the total basket of products")
     public float takeSumAllProduct() {
         float sum = 0;
         List<Locator> listLoc = tableElementsCart.all();

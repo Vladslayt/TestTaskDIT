@@ -18,10 +18,10 @@ public abstract class BaseTest {
         config = ConfigFactory.load();
         playwright = Playwright.create();
         String strBrowser = config.getString("browser");
-        switch (strBrowser) {
-            case "firefox" -> browser = playwright.firefox().launch(new BrowserType.LaunchOptions().setHeadless(false));
-            default -> browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
-        }
+        browser = switch (strBrowser) {
+            case "firefox" -> playwright.firefox().launch(new BrowserType.LaunchOptions().setHeadless(false));
+            default -> playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+        };
     }
 
     @AfterAll
@@ -39,5 +39,4 @@ public abstract class BaseTest {
     public void closeContext() {
         context.close();
     }
-
 }
