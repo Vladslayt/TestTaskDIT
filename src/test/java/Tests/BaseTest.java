@@ -17,8 +17,8 @@ public abstract class BaseTest {
     public void launchBrowser() {
         config = ConfigFactory.load();
         playwright = Playwright.create();
-
-        switch (config.getString("browser")) {
+        String strBrowser = config.getString("browser");
+        switch (strBrowser) {
             case "firefox" -> browser = playwright.firefox().launch(new BrowserType.LaunchOptions().setHeadless(false));
             default -> browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
         }
