@@ -1,10 +1,9 @@
-package Base;
+package Tests;
 
 import com.microsoft.playwright.*;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 import org.junit.jupiter.api.*;
-
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public abstract class BaseTest {
@@ -19,7 +18,7 @@ public abstract class BaseTest {
         config = ConfigFactory.load();
         playwright = Playwright.create();
 
-        switch (config.getString("browser.browser")){
+        switch (config.getString("browser")) {
             case "firefox" -> browser = playwright.firefox().launch(new BrowserType.LaunchOptions().setHeadless(false));
             default -> browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
         }

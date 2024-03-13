@@ -26,7 +26,7 @@ public class MainPage {
     public MainPage(Page page, Config config) {
         this.page = page;
         this.config = config;
-        page.navigate(config.getString("url.mainPage"));
+        page.navigate(config.getString("mainPage"));
 
         buttonRegistration = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Register"));
         registrationInputFieldUsername = page.locator("#register-username-modal");
@@ -60,12 +60,9 @@ public class MainPage {
 
     /**
      * Переход на страницу каталога
-     *
-     * @return объект класса Pages.CataloguePage
      */
     @Step("click on catalogue page")
-    public CataloguePage clickOnCatalogueButton() {
+    public void clickOnCatalogueButton() {
         buttonCatalogue.click();
-        return new CataloguePage(page, config);
     }
 }

@@ -2,21 +2,28 @@ package Pages;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
-import com.typesafe.config.Config;
 import io.qameta.allure.Step;
 
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Страница корзины
  */
 public class BasketPage {
     private final Page page;
-    private final Config config;
+    private static final String URL_BASKET = "http://localhost/basket.html";
+    private final Locator totalSumCart;
+    private final Locator tableElementsCart;
 
-    public BasketPage(Page page, Config config) {
+    public BasketPage(Page page) {
         this.page = page;
-        this.config = config;
+
+        totalSumCart = page.locator("#cartTotal");
+        tableElementsCart = page.locator("form").
+                filter(new Locator.FilterOptions().setHasText("Shopping cart Product"))
+                .locator("tr");
     }
 
     /**
@@ -24,7 +31,7 @@ public class BasketPage {
      */
     @Step("go to basket page")
     public BasketPage navigate() {
-        page.navigate(config.getString("url.basketPage"));
+        page.navigate(URL_BASKET);
         return this;
     }
 
@@ -33,10 +40,10 @@ public class BasketPage {
      *
      * @return сумма корзины
      */
-    @Step("Get sum basket")
-    public double takeTotalSum() {
-        page.waitForCondition(() -> page.locator("#cartTotal").textContent().length() > 0);
-        return Double.parseDouble(page.locator("#cartTotal").textContent().substring(1));
+    @Step("get sum basket")
+    public float takeTotalSum() {
+        page.waitForCondition(() -> totalSumCart.textContent().length() > 0);
+        return Float.parseFloat(totalSumCart.textContent().substring(1));
     }
 
     /**
@@ -44,12 +51,10 @@ public class BasketPage {
      *
      * @return сумма всех товаров корзины
      */
-    @Step("Calculating sum all product basket")
-    public double takeSumAllProduct() {
-        double sum = 0;
-        List<Locator> listLoc = page.locator("form")
-                .filter(new Locator.FilterOptions().setHasText("Shopping cart Product"))
-                .locator("tr").all();
+    @Step("calculating sum all product basket")
+    public float takeSumAllProduct() {
+        float sum = 0;
+        List<Locator> listLoc = tableElementsCart.all();
 
         for (int i = 1; i < listLoc.size() - 1; i++) {
             sum += Double.parseDouble(listLoc.get(i).locator("td").
@@ -57,5 +62,13 @@ public class BasketPage {
         }
 
         return sum;
+    }
+
+    /**
+     *  Сравнение суммы цены товаров в корзине и суммы цен заказанных товаров
+     */
+    @Step("compare total sum and sum all product")
+    public void compareTotalSums(float totalSum, float sumAllProduct) {
+        assertEquals(totalSum, sumAllProduct);
     }
 }
