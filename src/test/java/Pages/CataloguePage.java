@@ -13,7 +13,7 @@ public class CataloguePage {
     private final Page page;
     private final Config config;
     private final String URL_CATALOGUE;
-    public final Locator basketButton;
+    private final Locator basketButton;
 
     public CataloguePage(Page page, Config config) {
         this.page = page;
@@ -52,17 +52,19 @@ public class CataloguePage {
      * @param name название товара
      */
     @Step("add sock into basket")
-    public void addProductIntoBasket(String name) {
+    public CataloguePage addProductIntoBasket(String name) {
         page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName(name)).
                 locator("..").getByText("Add to cart").click();
+        return this;
     }
 
     /**
      * @param serialNumber порядковый номер товара
      */
     @Step("add sock into basket")
-    public void addProductIntoBasket(int serialNumber) {
+    public CataloguePage addProductIntoBasket(int serialNumber) {
         page.locator(String.format("div:nth-child(%d) > .product > .text > .buttons > a:nth-child(2)", serialNumber)).click();
+        return this;
     }
 
     /**

@@ -18,7 +18,12 @@ class SocksTest extends BaseTest {
                 .clickOnCatalogueButton();
 
         new CataloguePage(page, config)
-                .addSocksIntoBasket()
+                .addProductIntoBasket(1)
+                .addProductIntoBasket(2)
+                .addProductIntoBasket(3)
+                .addProductIntoBasket("Holy")
+                .addProductIntoBasket("Colourful")
+                .addProductIntoBasket("Crossed")
                 .goToBasketPage();
 
         BasketPage basketPage = new BasketPage(page, config);

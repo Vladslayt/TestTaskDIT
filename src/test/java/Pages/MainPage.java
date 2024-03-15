@@ -14,14 +14,14 @@ public class MainPage {
     private final Page page;
     private final Config config;
     private final Faker faker = new Faker();
-    public final Locator buttonRegistration;
-    public final Locator registrationInputFieldUsername;
-    public final Locator registrationInputFieldFirstName;
-    public final Locator registrationInputFieldLastName;
-    public final Locator registrationInputFieldEmail;
-    public final Locator registrationInputFieldPassword;
-    public final Locator registrationButtonRegister;
-    public final Locator buttonCatalogue;
+    private final Locator buttonRegistration;
+    private final Locator registrationInputFieldUsername;
+    private final Locator registrationInputFieldFirstName;
+    private final Locator registrationInputFieldLastName;
+    private final Locator registrationInputFieldEmail;
+    private final Locator registrationInputFieldPassword;
+    private final Locator registrationButtonRegister;
+    private final Locator buttonCatalogue;
 
     public MainPage(Page page, Config config) {
         this.page = page;
