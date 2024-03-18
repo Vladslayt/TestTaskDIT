@@ -32,23 +32,6 @@ public class CataloguePage {
     }
 
     /**
-     * Добавление в корзину носков
-     *
-     * @return объект, с которым работали
-     */
-    @Step("add socks in basket")
-    public CataloguePage addSocksIntoBasket() {
-        addProductIntoBasket(1);
-        addProductIntoBasket(2);
-        addProductIntoBasket(3);
-
-        addProductIntoBasket("Holy");
-        addProductIntoBasket("Colourful");
-        addProductIntoBasket("Crossed");
-        return this;
-    }
-
-    /**
      * @param name название товара
      */
     @Step("add sock into basket")
