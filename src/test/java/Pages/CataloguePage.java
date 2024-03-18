@@ -12,13 +12,13 @@ import io.qameta.allure.Step;
 public class CataloguePage {
     private final Page page;
     private final Config config;
-    private final String URL_CATALOGUE;
+    private final String urlCatalogue;
     private final Locator basketButton;
 
     public CataloguePage(Page page, Config config) {
         this.page = page;
         this.config = config;
-        this.URL_CATALOGUE = config.getString("mainPage") + "category.html/";
+        this.urlCatalogue = config.getString("mainPage") + "category.html/";
         basketButton = page.locator("//div[@id='navbar']//a[@href=\"basket.html\"]");
     }
 
@@ -27,7 +27,7 @@ public class CataloguePage {
      */
     @Step("go to catalogue page")
     public CataloguePage navigate() {
-        page.navigate(URL_CATALOGUE);
+        page.navigate(urlCatalogue);
         return this;
     }
 

@@ -15,14 +15,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class BasketPage {
     private final Page page;
     private final Config config;
-    private final String URL_BASKET;
+    private final String urlBasket;
     private final Locator totalSumCart;
     private final Locator tableElementsCart;
 
     public BasketPage(Page page, Config config) {
         this.page = page;
         this.config = config;
-        this.URL_BASKET = config.getString("mainPage") + "category.html/";
+        this.urlBasket = config.getString("mainPage") + "category.html/";
 
         totalSumCart = page.locator("#cartTotal");
         tableElementsCart = page.locator("form").
@@ -35,7 +35,7 @@ public class BasketPage {
      */
     @Step("go to basket page")
     public BasketPage navigate() {
-        page.navigate(URL_BASKET);
+        page.navigate(urlBasket);
         return this;
     }
 
